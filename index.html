@@ -1,11 +1,57 @@
 <!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <base target="_top">
 
-<html>
-   <head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-      <base target="_top">
-   </head>
-   <body>
-      <iframe style="position: absolute;top: 0;left: 0;width: 100%;height: 100%;border: 0;" src="https://script.google.com/macros/s/AKfycbyo8vXZMFyTX1sU5JWgvNJXwITk8u4-CIJxMlL5596mItboQgQrBc49BvRfdqud8ftQ/exec"></iframe>
-   </body>
+  <title>RGT</title>
+
+  <!-- 🔴 ตรงนี้คือจุดใส่ไอคอน -->
+  <link rel="icon" href="https://raw.githubusercontent.com/webmaxru/progressive-web-app/master/images/icons/icon-192x192.png">  <!-- ← ไอคอนหลัก -->
+  <link rel="apple-touch-icon" href="https://raw.githubusercontent.com/webmaxru/progressive-web-app/master/images/icons/icon-192x192.png">    --> ← ไอคอนใหญ่ (Android) -->
+  <link rel="manifest" href="manifest.json">
+
+  <meta name="theme-color" content="#0f172a">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="HR App">
+
+  <style>
+    body { margin:0 }
+    #splash {
+      position: fixed;
+      inset: 0;
+      background: #0f172a;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      color: white;
+    }
+    #splash img {
+      width: 120px;
+      margin-bottom: 12px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="splash">
+    <img src="icon-192.png">
+    <p>Loading...</p>
+  </div>
+
+  <iframe
+    src="https://script.google.com/macros/s/AKfycbyo8vXZMFyTX1sU5JWgvNJXwITk8u4-CIJxMlL5596mItboQgQrBc49BvRfdqud8ftQ/exec"
+    style="position:fixed;inset:0;border:none;"
+  ></iframe>
+
+  <script>
+    document.querySelector("iframe").onload = () => {
+      document.getElementById("splash").style.display = "none";
+    };
+  </script>
+</body>
 </html>
