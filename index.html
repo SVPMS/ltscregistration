@@ -1,28 +1,104 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <base target="_top">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<base target="_top">
+<title>LTSC Check-In</title>
 
-  <title>LTSC Check-In</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#1C5CAB">
+<link rel="apple-touch-icon" href="icon-192.png">
 
-  <!-- PWA -->
-  <link rel="manifest" href="manifest.json">
-  <meta name="theme-color" content="#0f172a">
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont;
+  }
 
-  <!-- Favicon -->
-  <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+  /* Splash Screen */
+  #splash {
+    position: fixed;
+    inset: 0;
+    background: linear-gradient(135deg, #1C5CAB, #0F3B7A);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    z-index: 9999;
+    transition: opacity .5s ease;
+  }
 
-  <!-- iOS -->
-  <link rel="apple-touch-icon" href="icon-192.png">
+  #logo {
+    width: 72px;
+    height: 72px;
+    margin-bottom: 16px;
+  }
+
+  .spinner {
+    width: 36px;
+    height: 36px;
+    border: 4px solid rgba(255,255,255,.3);
+    border-top-color: #fff;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 12px;
+  }
+
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+
+  .loading-text {
+    font-size: 14px;
+    opacity: .9;
+  }
+
+  iframe {
+    display: none;
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
+</style>
 </head>
 
-<body style="margin:0; padding:0; overflow:hidden;">
-  <iframe
-    src="https://script.google.com/macros/s/AKfycbzeVFKaOiZnfDD9ljGwIOqBto93xvfjNUPRJ8mwlkANWnQa3OtlGKpfLOH_E1xcjOUr/exec"
-    style="position:fixed; inset:0; width:100%; height:100%; border:none;"
-    allow="fullscreen"
-  ></iframe>
+<body>
+
+<!-- Splash -->
+<div id="splash">
+  <img id="logo" src="icon-192.png" alt="HR Connect">
+  <div class="spinner"></div>
+  <div class="loading-text">HR Connect...</div>
+</div>
+
+<!-- App -->
+<iframe
+  id="app"
+  src="https://script.google.com/macros/s/AKfycbzeVFKaOiZnfDD9ljGwIOqBto93xvfjNUPRJ8mwlkANWnQa3OtlGKpfLOH_E1xcjOUr/exec"
+  allow="fullscreen">
+</iframe>
+
+<script>
+  const splash = document.getElementById('splash');
+  const app = document.getElementById('app');
+
+  app.onload = () => {
+    setTimeout(() => {
+      splash.style.opacity = 0;
+      app.style.display = 'block';
+
+      setTimeout(() => {
+        splash.style.display = 'none';
+      }, 500);
+    }, 600); // หน่วงนิดให้ดู smooth
+  };
+</script>
+
 </body>
 </html>
